@@ -2,19 +2,25 @@
 <html lang="en">
 <head>
   Pokemon's
-
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
 
   <ol id = "spisok">  
-  
+    
   </ol>
   <button onclick="previuosPage()">Назад</button>
   <button onclick="nextPage()">Вперед</button>
   
 
 <script>
+
+
 
 let spisok = document.getElementById('spisok');
 //let popPup = document.getElementById('popPup');
@@ -24,27 +30,13 @@ let showMore = (url) => {
   console.log(url)
 }
 
-
-
-  //spisok.style.background = 'grey';
-
-//let answer = fetch ('https://pokeapi.co/api/v2/pokemon?limit=10&offset=10',
-
 let pokePage = 0;
 
 let nextPage = () => {
-    
-    //let pokePage = document.getElementsByName('pokemonString');
     console.log(pokePage);
-    //pokePage.forEach((item) => {
-    //    item.remove()
-    //});
-    ////spisok.remove(); удаление 
     spisok.innerHTML = "";
-    
     pokePage = pokePage + 10;
-    
-    answer()
+    getPockemonList()
      console.log(pokePage);
 }
 
@@ -57,12 +49,14 @@ let previuosPage = () => {
       pokePage = pokePage - 10;
     }
     spisok.innerHTML = "";
-    answer()
+    getPockemonList()
     console.log(pokePage);
 }
 
 
-let answerWeight = (url) => {fetch (url,
+
+
+let getPockemonDetails = (url,li) => {fetch (url,
 {
   method: "GET"//, // *GET, POST, PUT, DELETE, etc.
   //mode: "no-cors",
@@ -71,12 +65,34 @@ let answerWeight = (url) => {fetch (url,
     return response.json();
   })
   .then((data) => {
-    console.log(data.weight)
+    let stats = document.createElement ("p");
+    stats.innerHTML = "weight = " + data.weight;
+    
+    li.appendChild(stats)
+    
+    console.log(stats)
+    console.log(data.weight);
+   
     });
 };
 
+//очищение списка статов
+let clearPockemonDetails = (pokemonDetails) => {
+  pokemonDetails.innerHTML="";
+}
 
-let answer = () => {fetch ('https://pokeapi.co/api/v2/pokemon?limit=10&offset=' + pokePage,
+let showOpenButton = (buttonOpen,buttonClose) => {
+  buttonOpen.classList.remove ("hidden");
+  buttonClose.classList.add ("hidden");
+}
+
+let showCloseButton = (buttonOpen,buttonClose) => {
+  buttonClose.classList.remove ("hidden");
+  buttonOpen.classList.add ("hidden");
+}
+
+
+let getPockemonList = () => {fetch ('https://pokeapi.co/api/v2/pokemon?limit=10&offset=' + pokePage,
 {
   method: "GET"//, // *GET, POST, PUT, DELETE, etc.
   //mode: "no-cors",
@@ -86,27 +102,50 @@ let answer = () => {fetch ('https://pokeapi.co/api/v2/pokemon?limit=10&offset=' 
   })
   .then((data) => {
       data.results.forEach((item) => {
-       //spisok.insertAdjacentHTML("beforeend","<li>" + item.name + " " + "<button onclick='showMore(" + item.url + ")'>Развернуть</button>" + "</li>");
-       let li = document.createElement ("li")
-       li.innerHTML = item.name + " ";
-       let button = document.createElement ("button");
-       button.innerText = "Развернуть";
-       button.addEventListener ("click", function() {
-        answerWeight(item.url);
-        });
+       
+       let li = document.createElement ("li") //-- создаем список с покемонами
+       li.innerHTML = item.name + " ";     
+       
+       let pokemonDetails = document.createElement ("div")
+       //кнопка открытия
+
+       let buttonOpen = document.createElement ("button"); //--создаем менюшку для показа характеристик
+       buttonOpen.innerText = "Развернуть";
+       
+       
+       buttonOpen.addEventListener ("click", function() {
+        
+        getPockemonDetails(item.url,pokemonDetails);
+        showCloseButton (buttonOpen,buttonClose);
+        
+        });   
+
+       //кнопка закрытия
+
+       let buttonClose = document.createElement ("button");
+       buttonClose.innerText = "Свернуть";
+       buttonClose.classList.add ("hidden");
+       buttonClose.addEventListener ("click", function()
+       {
+
+        clearPockemonDetails(pokemonDetails);
+        showOpenButton (buttonOpen,buttonClose);
+        
+       })
+       
       
-      
-      li.appendChild (button);
+      li.appendChild (buttonOpen);
+      li.appendChild (buttonClose);
+      li.appendChild (pokemonDetails);
       spisok.insertAdjacentElement("beforeend",li);
        
       }
     );
     
-    //spisok.insertAdjacentHTML("afterbegin",data.results);
     console.log(data.results);
   });
 };
-answer();
+getPockemonList();
 
 </script>
 
