@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  Pokemon's
+
+</head>
+
+<body>
+
+  <ol id = "spisok">  
+  
+  </ol>
+  <button onclick="previuosPage()">Назад</button>
+  <button onclick="nextPage()">Вперед</button>
+  
+
+<script>
+
+let spisok = document.getElementById('spisok');
+//let popPup = document.getElementById('popPup');
+
+let showMore = (url) => {
+  //alert(item.url)
+  console.log(url)
+}
+
+
+
+  //spisok.style.background = 'grey';
+
+//let answer = fetch ('https://pokeapi.co/api/v2/pokemon?limit=10&offset=10',
+
+let pokePage = 0;
+
+let nextPage = () => {
+    
+    //let pokePage = document.getElementsByName('pokemonString');
+    console.log(pokePage);
+    //pokePage.forEach((item) => {
+    //    item.remove()
+    //});
+    ////spisok.remove(); удаление 
+    spisok.innerHTML = "";
+    
+    pokePage = pokePage + 10;
+    
+    answer()
+     console.log(pokePage);
+}
+
+
+let previuosPage = () => {
+    if (pokePage < 10){
+      pokePage = 0;
+    }
+    else {
+      pokePage = pokePage - 10;
+    }
+    spisok.innerHTML = "";
+    answer()
+    console.log(pokePage);
+}
+
+
+let answerWeight = (url) => {fetch (url,
+{
+  method: "GET"//, // *GET, POST, PUT, DELETE, etc.
+  //mode: "no-cors",
+})
+  .then((response) => {
+    return response.json();
+  })
+  .then((data) => {
+    console.log(data.weight)
+    });
+};
+
+
+let answer = () => {fetch ('https://pokeapi.co/api/v2/pokemon?limit=10&offset=' + pokePage,
+{
+  method: "GET"//, // *GET, POST, PUT, DELETE, etc.
+  //mode: "no-cors",
+})
+  .then((response) => {
+    return response.json();
+  })
+  .then((data) => {
+      data.results.forEach((item) => {
+       //spisok.insertAdjacentHTML("beforeend","<li>" + item.name + " " + "<button onclick='showMore(" + item.url + ")'>Развернуть</button>" + "</li>");
+       let li = document.createElement ("li")
+       li.innerHTML = item.name + " ";
+       let button = document.createElement ("button");
+       button.innerText = "Развернуть";
+       button.addEventListener ("click", function() {
+        answerWeight(item.url);
+        });
+      
+      
+      li.appendChild (button);
+      spisok.insertAdjacentElement("beforeend",li);
+       
+      }
+    );
+    
+    //spisok.insertAdjacentHTML("afterbegin",data.results);
+    console.log(data.results);
+  });
+};
+answer();
+
+</script>
+
+  </body>
+  </html>
