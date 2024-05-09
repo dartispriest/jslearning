@@ -9,7 +9,7 @@
 <body>
 
 
-    <table id = CashByDay>
+    <table id = "CashByDay">
         <tr>
           <th>DailyCash</th>
           <th>WeeklyCash</th>
@@ -21,44 +21,49 @@
           <td>Linus</td>
         </tr>
         <tr>
-          <td>11
-            <input type="button" value="1" data-counter>
-            <input type="button" value="2" data-counter>
-          </td>
+          <td id = "DailyCash"> 10 </td>
           <td>14</td>
           <td>10</td>
         </tr>
       </table>
+        <input id = "NewCash" type="div" name="amount" placeholder="Сумма" data-counter></input>
         <button onclick="AddIncome()">Добавить Доходы в день</button>
         <button onclick="AddExpenses()">Добавить Расходы в день</button>
      
-  
+      
 <script>
 
+//<input type="button" value="1" data-counter>
+//<input type="button" value="2" data-counter>
+//  document.addEventListener('click', function(event) {
 
-  document.addEventListener('click', function(event) {
+//    if (event.target.dataset.counter != undefined) { // если есть атрибут...
+//      event.target.value++;
+//    }
 
-    if (event.target.dataset.counter != undefined) { // если есть атрибут...
-      event.target.value++;
-    }
+//  });
 
-  });
+document.querySelector('input').value = 'Введите доход'
 
+function AddIncome () {
+    let DailyCash = document.getElementById('DailyCash')
+    DailyCash.innerHTML = "";
+    let NewCash = document.getElementById('NewCash')
+     NewCash.addEventListener('change',function(){
+        let val = document.getElementById('NewCash').value
+        document.getElementById('DailyCash').innerHTML=val;
+        
+    })
+    
 
-
-
-function AddIncome() {
-    var str = document.getElementById('CashByDay');
-    var add = str.insertRow(-1);
-    //add.insertCell(0);
-    var addTr = document.createElement("tr");
-    var addTd = document.createElement("td");
-    addTd.innerHTML="11";
-    addTr.appendChild(addTd);
-    str.appendChild(addTr);
+    console.log(NewCash)
+     console.log(DailyCash)
 }
 
 </script>
 
+
+
 </body>
 </html>
+
