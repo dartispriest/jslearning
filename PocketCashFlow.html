@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            CashFlow
+  
+
+        </head>
+
+<body>
+
+
+    <table id = CashByDay>
+        <tr>
+          <th>DailyCash</th>
+          <th>WeeklyCash</th>
+          <th>SummaryCash</th>
+        </tr>
+        <tr>
+          <td>Emil</td>
+          <td>Tobias</td>
+          <td>Linus</td>
+        </tr>
+        <tr>
+          <td>11
+            <input type="button" value="1" data-counter>
+            <input type="button" value="2" data-counter>
+          </td>
+          <td>14</td>
+          <td>10</td>
+        </tr>
+      </table>
+        <button onclick="AddIncome()">Добавить Доходы в день</button>
+        <button onclick="AddExpenses()">Добавить Расходы в день</button>
+     
+  
+<script>
+
+
+  document.addEventListener('click', function(event) {
+
+    if (event.target.dataset.counter != undefined) { // если есть атрибут...
+      event.target.value++;
+    }
+
+  });
+
+
+
+
+function AddIncome() {
+    var str = document.getElementById('CashByDay');
+    var add = str.insertRow(-1);
+    //add.insertCell(0);
+    var addTr = document.createElement("tr");
+    var addTd = document.createElement("td");
+    addTd.innerHTML="11";
+    addTr.appendChild(addTd);
+    str.appendChild(addTr);
+}
+
+</script>
+
+</body>
+</html>

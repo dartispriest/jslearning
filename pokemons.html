@@ -7,6 +7,8 @@
       display: none;
     }
   </style>
+  <link rel="stylesheet" href="pokeStyles.css">
+
 </head>
 
 <body>
@@ -16,9 +18,13 @@
   </ol>
   <button onclick="previuosPage()">Назад</button>
   <button onclick="nextPage()">Вперед</button>
+  <div class="loader">
+    <div class="loader_inner"></div>
+  </div>
   
 
 <script>
+
 
 
 
@@ -65,12 +71,21 @@ let getPockemonDetails = (url,li) => {fetch (url,
     return response.json();
   })
   .then((data) => {
-    let stats = document.createElement ("p");
-    stats.innerHTML = "weight = " + data.weight;
+    let showStatsText = document.createElement ("p")
+    showStatsText.innerText = "Характеристики покемона"
+
+    let statsWeight = document.createElement ("p");
+    statsWeight.innerHTML = "Вес = " + data.weight;
     
-    li.appendChild(stats)
+    let statsHeight = document.createElement ("p");
+    statsHeight.innerHTML = "Рост = " + data.height;
+
+    li.appendChild(showStatsText)
+    li.appendChild(statsWeight)
+    li.appendChild(statsHeight)
     
-    console.log(stats)
+    console.log(statsHeight);
+    console.log(statsWeight);
     console.log(data.weight);
    
     });
@@ -107,6 +122,7 @@ let getPockemonList = () => {fetch ('https://pokeapi.co/api/v2/pokemon?limit=10&
        li.innerHTML = item.name + " ";     
        
        let pokemonDetails = document.createElement ("div")
+       
        //кнопка открытия
 
        let buttonOpen = document.createElement ("button"); //--создаем менюшку для показа характеристик

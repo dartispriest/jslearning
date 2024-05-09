@@ -1,0 +1,54 @@
+body {
+    font-family: Arial, Verdana,  sans-serif; /* Семейство шрифтов */
+    font-size: 25pt; /* Размер основного шрифта в пунктах  */
+    background-color: #f0f0f0; /* Цвет фона веб-страницы */
+    color: #333; /* Цвет основного текста */ 
+  }
+  h1 {
+    color: #a52a2a; /* Цвет заголовка */
+    font-size: 24pt; /* Размер шрифта в пунктах */
+    font-family: Georgia, Times, serif; /* Семейство шрифтов */
+    font-weight: normal; /* Нормальное начертание текста  */
+  }
+  p {
+    text-align: justify; /* Выравнивание по ширине */
+    margin-left: 20px; /* Отступ слева в пикселах */
+    margin-right: 20px; /* Отступ справа в пикселах */
+    
+     padding-left: 15px; /* Отступ от линии слева до текста  */
+     padding-bottom: 2px; /* Отступ от линии снизу до текста  */
+     padding-top: 2px; 
+     padding-right: 2px; 
+    
+    max-width: max-content;
+  }
+  ol {
+    color: black;
+    /* max-width: max-content; */
+  }
+  li {
+    font-size: 10pt;
+    font-family: arial,verdana, sans-serif;
+    /* background-color: #999; */
+    padding-left: 1px;
+    padding-top: 1px;
+    padding-right: 1px;
+    padding-bottom: 1px;
+    border-radius: 5px solid #999;
+    
+  }
+  div {
+     max-width: max-content;
+     max-height: max-content; 
+    /* background-color: #b99d9d;
+    /* border-top: 0.1px solid black;
+    /* border-left: 0.1px solid black; /* Параметры линии слева */
+    /* border-bottom: 0.1px solid black; /* Параметры линии снизу */
+    /* border-right: 0.1px solid black; */
+    border: #333;
+    border-bottom: 0.05px solid seagreen;
+    border-top: 0.05px solid seagreen;
+    border-left: 0.05px solid seagreen;
+    border-right: 0.05px solid seagreen;
+  }
+  
